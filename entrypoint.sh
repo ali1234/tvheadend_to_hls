@@ -3,12 +3,11 @@
 
 nginx
 
-export local_http_path=/tmp/http/static
-export static_http_path=static/
+export hls_local_path=/tmp/tvhtohls
 export tvheadend_user=teletext
 export tvheadend_pass=teletext
 
-mkdir -p $local_http_path/hls/
+mkdir -p $hls_local_path
 while true
 do
 	venv/bin/tvhtohls
