@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>tvhtohls</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="hls.js"></script>
+    </head>
+    <body>
+        <video width="100%" id="video" controls></video>
+        <script>
+          var video = document.getElementById('video');
+          if (Hls.isSupported()) {
+            var hls = new Hls({
+              debug: true,
+            });
+            hls.loadSource('/hls/stream.m3u8');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+              video.muted=true;
+              video.play();
+            });
+          }
+          else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = '%s';
+            video.addEventListener('canplay', function () {
+              video.muted=true;
+              video.play();
+            });
+          }
+        </script>
+    </body>
+</html>
